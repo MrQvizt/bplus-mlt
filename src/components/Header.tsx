@@ -1,11 +1,24 @@
 import logo from '@/assets/benefitplus-logo.svg';
+import SearchInput from '@/components/SearchInput';
 
-const Header = () => {
+interface HeaderProps {
+  searchQuery?: string;
+  onSearchChange?: (value: string) => void;
+  showSearch?: boolean;
+}
+
+const Header = ({ searchQuery = '', onSearchChange, showSearch = true }: HeaderProps) => {
   return (
-    <header className="bg-background py-4 px-4">
-      <div className="flex flex-col items-start">
-        <img src={logo} alt="Benefitplus" className="h-10 w-auto" />
-        <p className="text-xs text-muted-foreground mt-1">Smart savings, close to you</p>
+    <header className="py-3 px-4">
+      <div className="flex items-center gap-3">
+        <img src={logo} alt="Benefitplus" className="h-9 w-auto flex-shrink-0" />
+        {showSearch && onSearchChange && (
+          <SearchInput
+            value={searchQuery}
+            onChange={onSearchChange}
+            placeholder="Search providers or offers..."
+          />
+        )}
       </div>
     </header>
   );

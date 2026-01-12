@@ -1,6 +1,5 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import Header from '@/components/Header';
-import SearchInput from '@/components/SearchInput';
 import CategoryChips from '@/components/CategoryChips';
 import OfferCard from '@/components/OfferCard';
 import BottomNav from '@/components/BottomNav';
@@ -13,7 +12,7 @@ const Index = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [isSticky, setIsSticky] = useState(false);
-  const promoBannerRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
 
   const filteredOffers = useMemo(() => {
     let result = selectedCategory === 'All' ? offers : getOffersByCategory(selectedCategory);
@@ -26,12 +25,12 @@ const Index = () => {
     return result.filter((o) => o.isActive);
   }, [selectedCategory, searchQuery]);
 
-  // Track when promo banner scrolls out of view
+  // Track when header scrolls out of view
   useEffect(() => {
     const handleScroll = () => {
-      if (promoBannerRef.current) {
-        const rect = promoBannerRef.current.getBoundingClientRect();
-        setIsSticky(rect.bottom <= 60); // 60px is roughly header height
+      if (headerRef.current) {
+        const rect = headerRef.current.getBoundingClientRect();
+        setIsSticky(rect.bottom <= 0);
       }
     };
 
@@ -41,22 +40,18 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-wavy-pattern pb-24">
-      <Header />
+      <div ref={headerRef}>
+        <Header searchQuery={searchQuery} onSearchChange={setSearchQuery} />
+      </div>
       
-      {/* Sticky container for search + categories */}
+      {/* Sticky container for categories */}
       <div 
         className={cn(
           'sticky top-0 z-20 transition-all duration-200',
           isSticky ? 'bg-background/95 backdrop-blur-sm shadow-sm' : 'bg-transparent'
         )}
       >
-        <div className="px-4 pt-3 pb-2 space-y-3">
-          <SearchInput
-            value={searchQuery}
-            onChange={setSearchQuery}
-            placeholder="Search providers or offers..."
-          />
-          
+        <div className="px-4 py-2">
           <CategoryChips
             selected={selectedCategory}
             onSelect={setSelectedCategory}
@@ -67,7 +62,7 @@ const Index = () => {
       <main className="px-4 space-y-4">
         <h1 className="text-2xl font-bold text-foreground">Offers</h1>
 
-        <div ref={promoBannerRef}>
+        <div>
           <PromoBanner />
         </div>
         
