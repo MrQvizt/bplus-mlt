@@ -11,6 +11,7 @@ import ProviderPage from "./pages/ProviderPage";
 import Providers from "./pages/Providers";
 import ProviderLanding from "./pages/ProviderLanding";
 import Account from "./pages/Account";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/auth" element={<Auth />} />
             <Route path="/offer/:id" element={<OfferDetail />} />
             <Route path="/redeem/:id" element={<RedeemOffer />} />
             <Route path="/provider/:id" element={<ProviderPage />} />
