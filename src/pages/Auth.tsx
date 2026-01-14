@@ -36,7 +36,7 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-wavy-pattern flex flex-col">
+    <div className="min-h-screen flex flex-col">
       {/* Main content */}
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-12">
         {/* Logo */}

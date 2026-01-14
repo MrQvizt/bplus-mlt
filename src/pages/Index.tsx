@@ -39,7 +39,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-wavy-pattern pb-24">
+    <div className="min-h-screen pb-24">
       <div ref={headerRef}>
         <Header searchQuery={searchQuery} onSearchChange={setSearchQuery} />
       </div>

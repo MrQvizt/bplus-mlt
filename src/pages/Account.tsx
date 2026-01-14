@@ -11,7 +11,7 @@ const Account = () => {
   const [showLogin, setShowLogin] = useState(false);
 
   return (
-    <div className="min-h-screen bg-wavy-pattern pb-24">
+    <div className="min-h-screen pb-24">
       <Header />
       
       <main className="px-4 space-y-4">
