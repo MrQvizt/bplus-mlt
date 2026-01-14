@@ -22,7 +22,7 @@ const ProviderLanding = () => {
   const whatsappLink = "https://wa.me/35699695920";
 
   return (
-    <div className="min-h-screen bg-wavy-pattern">
+    <div className="min-h-screen">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-border">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">

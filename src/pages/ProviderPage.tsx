@@ -14,14 +14,14 @@ const ProviderPage = () => {
 
   if (!provider) {
     return (
-      <div className="min-h-screen bg-wavy-pattern flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <p className="text-muted-foreground">Provider not found</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-wavy-pattern pb-24">
+    <div className="min-h-screen pb-24">
       <header className="bg-background sticky top-0 z-10 px-4 py-3 flex items-center gap-3 border-b border-border">
         <button
           onClick={() => navigate(-1)}

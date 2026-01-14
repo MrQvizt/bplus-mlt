@@ -20,7 +20,7 @@ const OfferDetail = () => {
 
   if (!offer || !provider) {
     return (
-      <div className="min-h-screen bg-wavy-pattern flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <p className="text-muted-foreground">Offer not found</p>
       </div>
     );
@@ -62,7 +62,7 @@ const OfferDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-wavy-pattern pb-32">
+    <div className="min-h-screen pb-32">
       <header className="bg-background sticky top-0 z-10 px-4 py-3 flex items-center gap-3 border-b border-border">
         <button
           onClick={() => navigate(-1)}
