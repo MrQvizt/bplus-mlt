@@ -57,6 +57,10 @@
 
   body {
     @apply bg-background text-foreground antialiased;
+    background-image: url('/images/pattern-bg.png');
+    background-repeat: repeat;
+    background-size: 400px;
+    background-attachment: fixed;
   }
 }
 
