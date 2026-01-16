@@ -44,24 +44,25 @@ const ProviderLanding = () => {
         <p className="text-sm text-muted-foreground">Launching in Malta. Gozo coming soon.</p>
       </div>
 
-      {/* What is Benefitplus? */}
-      <section className="py-12 md:py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto bg-background/90 backdrop-blur-sm rounded-2xl p-8 shadow-sm">
+      {/* Main Content Panel - Single unified panel */}
+      <div className="container mx-auto px-4 py-8 md:py-12">
+        <div className="bg-background/95 backdrop-blur-sm rounded-3xl shadow-lg max-w-4xl mx-auto overflow-hidden">
+          
+          {/* What is Benefitplus? */}
+          <section className="px-6 md:px-12 py-10 md:py-14">
             <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-6 text-center">
               What is Benefitplus?
             </h1>
-            <p className="text-muted-foreground leading-relaxed text-center">
+            <p className="text-muted-foreground leading-relaxed text-center max-w-2xl mx-auto">
               Benefitplus is a local discount discovery app. Users browse offers nearby and redeem them in-store using a secure, rotating code. There are no contracts, no commitments—just a simple way to attract more customers to your business.
             </p>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      {/* How It Works - 3 Steps */}
-      <section className="py-12 md:py-16">
-        <div className="container mx-auto px-4">
-          <div className="bg-background/90 backdrop-blur-sm rounded-2xl p-8 shadow-sm max-w-4xl mx-auto">
+          {/* Divider */}
+          <div className="border-t border-border/50 mx-6 md:mx-12" />
+
+          {/* How It Works - 3 Steps */}
+          <section className="px-6 md:px-12 py-10 md:py-14">
             <h2 className="text-xl md:text-2xl font-bold text-center text-foreground mb-10">
               How It Works
             </h2>
@@ -88,14 +89,13 @@ const ProviderLanding = () => {
                 <h3 className="text-base font-semibold text-foreground">Customers redeem with a rotating code</h3>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      {/* Visual Demo - Mockups */}
-      <section className="py-12 md:py-16">
-        <div className="container mx-auto px-4">
-          <div className="bg-background/90 backdrop-blur-sm rounded-2xl p-8 shadow-sm max-w-4xl mx-auto">
+          {/* Divider */}
+          <div className="border-t border-border/50 mx-6 md:mx-12" />
+
+          {/* Visual Demo - Mockups */}
+          <section className="px-6 md:px-12 py-10 md:py-14">
             <h2 className="text-xl md:text-2xl font-bold text-center text-foreground mb-10">
               See It In Action
             </h2>
@@ -177,17 +177,16 @@ const ProviderLanding = () => {
                 <p className="text-center text-sm text-muted-foreground mt-3">Simple rotating code redemption</p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      {/* What You Get / What We Need */}
-      <section className="py-12 md:py-16">
-        <div className="container mx-auto px-4">
-          <div className="bg-background/90 backdrop-blur-sm rounded-2xl p-8 shadow-sm max-w-3xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-6">
+          {/* Divider */}
+          <div className="border-t border-border/50 mx-6 md:mx-12" />
+
+          {/* What You Get / What We Need */}
+          <section className="px-6 md:px-12 py-10 md:py-14">
+            <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
               {/* What You Get */}
-              <Card className="border-primary/20">
+              <Card className="border-primary/20 bg-card/50">
                 <CardContent className="p-6">
                   <h3 className="text-lg font-semibold text-foreground mb-5">What You Get</h3>
                   <ul className="space-y-4">
@@ -207,7 +206,7 @@ const ProviderLanding = () => {
                 </CardContent>
               </Card>
               {/* What We Need */}
-              <Card>
+              <Card className="bg-card/50">
                 <CardContent className="p-6">
                   <h3 className="text-lg font-semibold text-foreground mb-5">What We Need</h3>
                   <ul className="space-y-4">
@@ -231,20 +230,19 @@ const ProviderLanding = () => {
                 </CardContent>
               </Card>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      {/* CTA Section */}
-      <section id="cta-section" className="py-12 md:py-16">
-        <div className="container mx-auto px-4">
-          <div className="bg-background/90 backdrop-blur-sm rounded-2xl p-8 shadow-sm max-w-2xl mx-auto">
+          {/* Divider */}
+          <div className="border-t border-border/50 mx-6 md:mx-12" />
+
+          {/* CTA Section */}
+          <section id="cta-section" className="px-6 md:px-12 py-10 md:py-14">
             <h2 className="text-xl md:text-2xl font-bold text-center text-foreground mb-10">
               Get Started
             </h2>
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
               {/* WhatsApp CTA */}
-              <div className="flex flex-col items-center text-center">
+              <div className="flex flex-col items-center justify-center text-center">
                 <Button asChild size="lg" className="w-full gap-2">
                   <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
                     <MessageCircle className="h-5 w-5" />
@@ -254,7 +252,7 @@ const ProviderLanding = () => {
                 <p className="text-sm text-muted-foreground mt-3">Quick response, no forms</p>
               </div>
               {/* Form CTA */}
-              <Card>
+              <Card className="bg-card/50">
                 <CardContent className="p-5">
                   <h3 className="text-base font-semibold text-foreground mb-4 text-center">Request a Demo</h3>
                   <form onSubmit={handleSubmit} className="space-y-3">
@@ -284,16 +282,15 @@ const ProviderLanding = () => {
                 </CardContent>
               </Card>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      {/* Footer */}
-      <footer className="py-6 border-t border-border">
-        <div className="container mx-auto px-4 text-center">
-          <img src={benefitplusLogo} alt="Benefitplus" className="h-6 w-auto mx-auto" />
+          {/* Footer inside panel */}
+          <div className="border-t border-border/50 mx-6 md:mx-12" />
+          <footer className="px-6 md:px-12 py-6 text-center">
+            <img src={benefitplusLogo} alt="Benefitplus" className="h-6 w-auto mx-auto" />
+          </footer>
         </div>
-      </footer>
+      </div>
     </div>
   );
 };
