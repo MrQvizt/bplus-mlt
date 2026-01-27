@@ -3,6 +3,7 @@ import { ArrowLeft } from 'lucide-react';
 import { getOfferById, getProviderById } from '@/data/mockData';
 import CodeRevealWithTimer from '@/components/CodeRevealWithTimer';
 import BottomNav from '@/components/BottomNav';
+import PagePanel from '@/components/layout/PagePanel';
 
 const RedeemOffer = () => {
   const { id } = useParams<{ id: string }>();
@@ -31,22 +32,24 @@ const RedeemOffer = () => {
         <h1 className="font-semibold text-foreground truncate">Redeem Offer</h1>
       </header>
 
-      <main className="px-4 py-8">
-        {/* Offer Summary */}
-        <div className="flex items-center gap-3 mb-8">
-          <img
-            src={provider.logoUrl}
-            alt={provider.name}
-            className="w-12 h-12 rounded-lg object-cover"
-          />
-          <div>
-            <p className="text-sm text-muted-foreground">{provider.name}</p>
-            <p className="font-semibold text-foreground">{offer.title}</p>
+      <PagePanel className="mx-4 mt-4 mb-6">
+        <main className="px-4 py-8">
+          {/* Offer Summary */}
+          <div className="flex items-center gap-3 mb-8">
+            <img
+              src={provider.logoUrl}
+              alt={provider.name}
+              className="w-12 h-12 rounded-lg object-cover"
+            />
+            <div>
+              <p className="text-sm text-muted-foreground">{provider.name}</p>
+              <p className="font-semibold text-foreground">{offer.title}</p>
+            </div>
           </div>
-        </div>
 
-        <CodeRevealWithTimer baseCode={offer.baseCode} />
-      </main>
+          <CodeRevealWithTimer baseCode={offer.baseCode} />
+        </main>
+      </PagePanel>
 
       <BottomNav />
     </div>
