@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { MessageCircle, Send, Store, Smartphone, CheckCircle, Eye, Settings, Sparkles, MapPin, Image, FileText, User } from "lucide-react";
 import benefitplusLogo from "@/assets/benefitplus-logo.svg";
+import PagePanel from "@/components/layout/PagePanel";
 
 const ProviderLanding = () => {
   const [formData, setFormData] = useState({
@@ -46,7 +47,7 @@ const ProviderLanding = () => {
 
       {/* Main Content Panel - Single unified panel */}
       <div className="container mx-auto px-4 py-8 md:py-12">
-        <div className="bg-background/95 backdrop-blur-sm rounded-3xl shadow-lg max-w-4xl mx-auto overflow-hidden">
+        <PagePanel className="max-w-4xl mx-auto overflow-hidden shadow-lg">
           
           {/* What is Benefitplus? */}
           <section className="px-6 md:px-12 py-10 md:py-14">
@@ -289,7 +290,7 @@ const ProviderLanding = () => {
           <footer className="px-6 md:px-12 py-6 text-center">
             <img src={benefitplusLogo} alt="Benefitplus" className="h-6 w-auto mx-auto" />
           </footer>
-        </div>
+        </PagePanel>
       </div>
     </div>
   );

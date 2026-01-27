@@ -4,6 +4,7 @@ import { Globe, MessageCircle } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import logo from '@/assets/benefitplus-logo.svg';
+import PagePanel from '@/components/layout/PagePanel';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -39,11 +40,12 @@ const Auth = () => {
     <div className="min-h-screen flex flex-col">
       {/* Main content */}
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-12">
-        {/* Logo */}
-        <img src={logo} alt="Benefitplus" className="h-24 w-auto mb-8" />
+        <PagePanel className="w-full max-w-sm p-6">
+          {/* Logo */}
+          <div className="flex justify-center mb-6">
+            <img src={logo} alt="Benefitplus" className="h-16 w-auto" />
+          </div>
 
-        {/* Card */}
-        <div className="w-full max-w-sm">
           <h1 className="text-3xl font-bold text-foreground mb-1">
             {isSignUp ? 'Create Account' : 'Login Account'}
           </h1>
@@ -51,9 +53,7 @@ const Auth = () => {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
-                Email
-              </label>
+              <label className="block text-sm font-medium text-foreground mb-2">Email</label>
               <input
                 type="email"
                 value={email}
@@ -63,9 +63,7 @@ const Auth = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
-                Password
-              </label>
+              <label className="block text-sm font-medium text-foreground mb-2">Password</label>
               <input
                 type="password"
                 value={password}
@@ -83,9 +81,7 @@ const Auth = () => {
               </button>
             )}
 
-            {error && (
-              <p className="text-sm text-destructive text-center">{error}</p>
-            )}
+            {error && <p className="text-sm text-destructive text-center">{error}</p>}
 
             <Button
               type="submit"
@@ -105,7 +101,7 @@ const Auth = () => {
               {isSignUp ? 'Sign In' : 'Sign Up'}
             </button>
           </p>
-        </div>
+        </PagePanel>
       </div>
 
       {/* Footer links */}
@@ -114,12 +110,12 @@ const Auth = () => {
           href="https://benefitplus.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 text-amber-500 hover:text-amber-600 transition-colors"
+          className="flex items-center gap-2 text-primary hover:text-primary/90 transition-colors"
         >
           <Globe className="h-5 w-5" />
           <span className="text-sm font-medium">Visit Benefit plus</span>
         </a>
-        <button className="flex items-center gap-2 text-amber-500 hover:text-amber-600 transition-colors">
+        <button className="flex items-center gap-2 text-primary hover:text-primary/90 transition-colors">
           <MessageCircle className="h-5 w-5" />
           <span className="text-sm font-medium">Support</span>
         </button>
