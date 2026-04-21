@@ -11,13 +11,15 @@ const Auth = () => {
   const [password, setPassword] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, signUp } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setSuccessMessage('');
     setIsLoading(true);
 
     if (!email || !password) {
@@ -26,22 +28,29 @@ const Auth = () => {
       return;
     }
 
-    const success = await login(email, password);
-    setIsLoading(false);
-
-    if (success) {
-      navigate('/');
+    if (isSignUp) {
+      const { error: signUpError } = await signUp(email, password);
+      setIsLoading(false);
+      if (signUpError) {
+        setError(signUpError);
+      } else {
+        setSuccessMessage('Account created! Check your email to confirm before signing in.');
+      }
     } else {
-      setError('Invalid email or password');
+      const success = await login(email, password);
+      setIsLoading(false);
+      if (success) {
+        navigate('/');
+      } else {
+        setError('Invalid email or password');
+      }
     }
   };
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Main content */}
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-12">
         <PagePanel className="w-full max-w-sm p-6">
-          {/* Logo */}
           <div className="flex justify-center mb-6">
             <img src={logo} alt="Benefitplus" className="h-16 w-auto" />
           </div>
@@ -82,6 +91,7 @@ const Auth = () => {
             )}
 
             {error && <p className="text-sm text-destructive text-center">{error}</p>}
+            {successMessage && <p className="text-sm text-primary text-center">{successMessage}</p>}
 
             <Button
               type="submit"
@@ -95,7 +105,11 @@ const Auth = () => {
           <p className="text-center text-sm text-muted-foreground mt-6">
             {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
             <button
-              onClick={() => setIsSignUp(!isSignUp)}
+              onClick={() => {
+                setIsSignUp(!isSignUp);
+                setError('');
+                setSuccessMessage('');
+              }}
               className="text-primary font-medium hover:underline"
             >
               {isSignUp ? 'Sign In' : 'Sign Up'}
@@ -104,7 +118,6 @@ const Auth = () => {
         </PagePanel>
       </div>
 
-      {/* Footer links */}
       <div className="flex items-center justify-center gap-8 pb-8">
         <a
           href="https://benefitplus.com"

@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import { getOfferById, getProviderById } from '@/data/mockData';
+import { useOffer, useProvider } from '@/hooks/useData';
 import CodeRevealWithTimer from '@/components/CodeRevealWithTimer';
 import BottomNav from '@/components/BottomNav';
 import PagePanel from '@/components/layout/PagePanel';
@@ -9,8 +9,16 @@ const RedeemOffer = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const offer = id ? getOfferById(id) : undefined;
-  const provider = offer ? getProviderById(offer.providerId) : undefined;
+  const { data: offer, isLoading: loadingOffer } = useOffer(id);
+  const { data: provider, isLoading: loadingProvider } = useProvider(offer?.providerId);
+
+  if (loadingOffer || loadingProvider) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   if (!offer || !provider) {
     return (
@@ -34,7 +42,6 @@ const RedeemOffer = () => {
 
       <PagePanel className="mx-4 mt-4 mb-6">
         <main className="px-4 py-8">
-          {/* Offer Summary */}
           <div className="flex items-center gap-3 mb-8">
             <img
               src={provider.logoUrl}

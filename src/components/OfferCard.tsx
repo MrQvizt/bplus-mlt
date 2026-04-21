@@ -1,16 +1,14 @@
 import { MapPin } from 'lucide-react';
-import { Offer, getProviderById } from '@/data/mockData';
+import type { Offer, Provider } from '@/data/mockData';
 import { useNavigate } from 'react-router-dom';
 
 interface OfferCardProps {
   offer: Offer;
+  provider: Provider;
 }
 
-const OfferCard = ({ offer }: OfferCardProps) => {
+const OfferCard = ({ offer, provider }: OfferCardProps) => {
   const navigate = useNavigate();
-  const provider = getProviderById(offer.providerId);
-
-  if (!provider) return null;
 
   return (
     <div

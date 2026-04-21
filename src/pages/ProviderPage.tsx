@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Phone, Instagram, MapPin } from 'lucide-react';
-import { getProviderById, getOffersByProvider } from '@/data/mockData';
+import { useProvider, useOffersByProvider } from '@/hooks/useData';
 import { Button } from '@/components/ui/button';
 import OfferCard from '@/components/OfferCard';
 import BottomNav from '@/components/BottomNav';
@@ -10,8 +10,16 @@ const ProviderPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const provider = id ? getProviderById(id) : undefined;
-  const providerOffers = id ? getOffersByProvider(id).filter((o) => o.isActive) : [];
+  const { data: provider, isLoading: loadingProvider } = useProvider(id);
+  const { data: providerOffers = [], isLoading: loadingOffers } = useOffersByProvider(id);
+
+  if (loadingProvider || loadingOffers) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   if (!provider) {
     return (
@@ -35,7 +43,6 @@ const ProviderPage = () => {
 
       <PagePanel className="mx-4 mt-4 mb-6">
         <main className="px-4 py-6 space-y-6">
-          {/* Provider Header */}
           <div className="flex items-start gap-4">
             <img
               src={provider.logoUrl}
@@ -50,7 +57,6 @@ const ProviderPage = () => {
             </div>
           </div>
 
-          {/* Contact Buttons */}
           {(provider.phone || provider.instagram) && (
             <div className="flex gap-3">
               {provider.phone && (
@@ -76,7 +82,6 @@ const ProviderPage = () => {
             </div>
           )}
 
-          {/* Locations */}
           <div className="card-elevated p-5">
             <h4 className="font-semibold text-foreground mb-3">Locations</h4>
             <ul className="space-y-3">
@@ -89,7 +94,6 @@ const ProviderPage = () => {
             </ul>
           </div>
 
-          {/* Offers */}
           {providerOffers.length > 0 && (
             <div>
               <h4 className="font-semibold text-foreground mb-3">
@@ -97,7 +101,7 @@ const ProviderPage = () => {
               </h4>
               <div className="space-y-3">
                 {providerOffers.map((offer) => (
-                  <OfferCard key={offer.id} offer={offer} />
+                  <OfferCard key={offer.id} offer={offer} provider={provider} />
                 ))}
               </div>
             </div>

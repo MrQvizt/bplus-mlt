@@ -4,7 +4,7 @@ import CategoryChips from '@/components/CategoryChips';
 import OfferCard from '@/components/OfferCard';
 import BottomNav from '@/components/BottomNav';
 import PromoBanner from '@/components/PromoBanner';
-import { offers, getOffersByCategory, searchOffers } from '@/data/mockData';
+import { useOffersWithProvider } from '@/hooks/useData';
 import { Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import PagePanel from '@/components/layout/PagePanel';
@@ -15,18 +15,27 @@ const Index = () => {
   const [isSticky, setIsSticky] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
 
+  const { data: allOffers = [], isLoading } = useOffersWithProvider();
+
   const filteredOffers = useMemo(() => {
-    let result = selectedCategory === 'All' ? offers : getOffersByCategory(selectedCategory);
-    
-    if (searchQuery.trim()) {
-      const searchResults = searchOffers(searchQuery);
-      result = result.filter((offer) => searchResults.some((sr) => sr.id === offer.id));
+    let result = allOffers;
+
+    if (selectedCategory !== 'All') {
+      result = result.filter(({ offer }) => offer.category === selectedCategory);
     }
 
-    return result.filter((o) => o.isActive);
-  }, [selectedCategory, searchQuery]);
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      result = result.filter(
+        ({ offer, provider }) =>
+          offer.title.toLowerCase().includes(q) ||
+          provider.name.toLowerCase().includes(q)
+      );
+    }
 
-  // Track when header scrolls out of view
+    return result;
+  }, [allOffers, selectedCategory, searchQuery]);
+
   useEffect(() => {
     const handleScroll = () => {
       if (headerRef.current) {
@@ -34,7 +43,6 @@ const Index = () => {
         setIsSticky(rect.bottom <= 0);
       }
     };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -46,7 +54,6 @@ const Index = () => {
           <Header searchQuery={searchQuery} onSearchChange={setSearchQuery} />
         </div>
 
-        {/* Sticky container for categories */}
         <div
           className={cn(
             'sticky top-0 z-20 transition-all duration-200',
@@ -66,8 +73,16 @@ const Index = () => {
           </div>
 
           <div className="space-y-3 pt-2">
-            {filteredOffers.length > 0 ? (
-              filteredOffers.map((offer) => <OfferCard key={offer.id} offer={offer} />)
+            {isLoading ? (
+              <div className="space-y-3">
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="card-elevated p-4 h-24 animate-pulse bg-muted rounded-xl" />
+                ))}
+              </div>
+            ) : filteredOffers.length > 0 ? (
+              filteredOffers.map(({ offer, provider }) => (
+                <OfferCard key={offer.id} offer={offer} provider={provider} />
+              ))
             ) : (
               <div className="flex flex-col items-center justify-center py-16 text-center">
                 <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center mb-4">
