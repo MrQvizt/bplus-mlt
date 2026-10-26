@@ -1,3 +1,21 @@
+# ⚠️ Superseded — do not deploy
+
+This repository is an early prototype of Bpluz (January 2026) and is **no
+longer maintained**. It talks to no production system and should not be
+deployed or used as a reference.
+
+The live product is:
+
+| What | Repository |
+|---|---|
+| Web app (employees, companies, Brands, admins) | [MrQvizt/bpluz-app](https://github.com/MrQvizt/bpluz-app) |
+| Marketing site (www.bpluz.com) | [MrQvizt/Bpluz-landing-page](https://github.com/MrQvizt/Bpluz-landing-page) |
+
+Consider archiving this repository on GitHub (Settings → Archive) so it is
+read-only.
+
+---
+
 # Welcome to your Lovable project
 
 ## Project info
